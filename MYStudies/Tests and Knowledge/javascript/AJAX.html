@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <div id="demo">
+           <h2>WIND is but a WIND</h2>
+           <button type="button" onclick="loadDoc()">chamge content</button> 
+        </div>
+        <script>
+            function loadDoc() {
+                const xhttp = new HMLHttpRequest();
+                xhttp.onload = function() {
+                    document.getElementById("demo").innerHTML = this.responseText;
+                }
+                xhttp.open("Get", "ajax_info.txt");
+                xhttp.send();
+            }
+        </script>
+    </body>
+</html>
