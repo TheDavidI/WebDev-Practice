@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>1 час и 47 минути</title>
+        <style>
+            * body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background: #f4f4f4;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .container {
+                text-align: center;
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                width: 90%;
+                max-width: 400px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                color: #333;
+                margin-bottom: 20px;
+                line-height: 1.5;
+            }
+
+            #time {
+                font-size: 2rem;
+                font-weight: bold;
+                margin-bottom: 20px;
+                }
+
+            .digit {
+                display: inline-block;
+                min-width: 40px;
+                padding: 5px;
+                border-radius: 5px;
+                background: #e0e0e0;
+                color: #333;
+                text-align: center;
+            }
+
+            .txt {
+                font-size: 0.9rem;
+                margin: 0 10px;
+                color: #666;
+            }
+
+            #buttons {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .btn {
+                background: #04AA6D;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 1rem;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+            .btn:hover {
+                background: #038754;
+            }
+
+            @media (max-width: 480px) {
+                h1 {
+                    font-size: 1.5rem;
+                }
+
+                #time {
+                    font-size: 1.5rem;
+                }
+
+                .btn {
+                    padding: 8px 15px;
+                    font-size: 0.9rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Stop Watch</h1>
+            <div id="time">
+                <span class="digit" id="hr">00</span>
+                <span class="txt">Hr</span>
+                <span class="digit" id="min">00</span>
+                <span class="txt">Min</span>
+                <span class="digit" id="sec">00</span>
+                <span class="txt">Sec</span>
+                <span class="digit" id="mill">00</span>
+                <span class="txt">Mil</span>
+            </div>
+            <div id="buttons">
+                <button class="btn" id="start">Start</button>
+                <button class="btn" id="stop">Stop</button>
+                <button class="btn" id="reset">Reset</button>
+            </div>
+        </div>
+        <script>
+            let startBtn = document.getElementById('start');
+            let stopBtn = document.getElementById('stop');
+            let resetBtn = document.getElementById('reset');
+            let timer = false;
+
+            let hour = 0, minute = 0, second = 0, milliseconds = 0;
+
+            startBtn.addEventListener("click", function() {
+                if (!timer) {
+                    timer = true;
+                    startWatch();
+                }    
+            });
+
+            stopBtn.addEventListener("click", function() {
+                timer = false;
+            });
+
+            resetBtn.addEventListener("click", function() {
+                timer = false;
+                hour = 0;
+                minute = 0;
+                second = 0;
+                milliseconds = 0;
+
+                document.getElementById('hr').innerHTML = "00";
+                document.getElementById('min').innerHTML = "00";
+                document.getElementById('sec').innerHTML = "00";
+                document.getElementById('mill').innerHTML = "00";
+            });
+
+            function startWatch() {
+                if (timer) {
+                    milliseconds++;
+
+                    if (milliseconds == 100) {
+                        second++;
+                        milliseconds = 0;
+                    }
+                    
+                    if (second == 60) {
+                    minute++;
+                    second = 0;
+                    }
+                    
+                    if (minute == 60) {
+                        hour++;
+                        minute = 0;
+                        second = 0;
+                    }
+
+                    let Thehr = hour < 10 ? "0" + hour : hour;
+                    let Themin = minute < 10 ? "0" + minute : minute;
+                    let Thesec = second < 10 ? "0" + second : second;
+                    let Themill = milliseconds < 10 ? "0" + milliseconds : milliseconds;
+
+                    document.getElementById('hr').innerHTML = Thehr;
+                    document.getElementById('min').innerHTML = Themin;
+                    document.getElementById('sec').innerHTML = Thesec;
+                    document.getElementById('mill').innerHTML = Themill;
+
+                    setTimeout(startWatch, 10);
+                }
+            }
+        </script>
+    </body>
+</html>

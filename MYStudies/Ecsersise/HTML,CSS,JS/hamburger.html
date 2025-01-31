@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>1 часа и 41 минути</title>
+        <style>
+            * body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .mobile-container {
+                max-width: 480px;
+                margin: auto;
+                background-color: #555;
+                height: 500px;
+                color: white;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .topnav {
+                overflow: hidden;
+                background-color: #333;
+                position: relative;
+            }
+
+            .topnav #myLinks {
+                display: none;
+            }
+
+            .topnav a {
+                color: white;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+                display: block;
+            }
+
+            .topnav a.icon {
+                background: black;
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .topnav a:hover {
+                background-color: #ddd;
+                color: black;
+            }
+
+            .active {
+                background-color: #04AA6D;
+                color: white;
+            }
+
+    
+            p {
+                max-height: 250px; 
+                overflow-y: auto; 
+                padding: 10px;
+                background: #666;
+                border-radius: 5px;
+            }
+
+    
+            @media screen and (min-width: 481px) {
+                .mobile-container {
+                    max-width: 800px;
+                    height: auto;
+                    padding: 10px;
+                }
+
+                .topnav a {
+                    font-size: 20px;
+                }
+            }
+
+            @media screen and (min-width: 1024px) {
+                .mobile-container {
+                    max-width: 1200px;
+                }
+
+                .topnav {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .topnav #myLinks {
+                    display: flex;
+                    gap: 15px;
+                }
+
+                .topnav a.icon {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="mobile-container">
+
+            <div class="topnav">
+                <a href="" class="active">Logo</a>
+                <div id="myLinks">
+                    <a href="https://www.youtube.com/shorts/ntYQnHkjc8Q">News</a>
+                    <a href="https://www.fountain.com/contact-us">Contact</a>
+                    <a href="https://en.wikipedia.org/wiki/Fountain">About</a>
+                </div>
+                <a href="javascript:void(0);" class="icon">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+
+            <div style="padding: 14px;">
+                <h3>Meaning of Fountain</h3>
+                <p>The word fountain has various meanings, both literal and metaphorical, and is often used to describe structures, sources, and even concepts. Here is an in-depth exploration of the term:
+
+                    1. Physical Structure
+                    At its most basic, a fountain is a structure designed to produce and control the flow of water, typically for decorative, functional, or symbolic purposes. These are often seen in public parks, plazas, gardens, or buildings and can range from simple spouts to intricate artistic works. Historically, fountains were used as part of elaborate irrigation and water distribution systems. In ancient Rome, for example, fountains were fed by aqueducts and served as public water sources.
+            
+                    Modern fountains often incorporate pumps to circulate water, and many include lighting and music for aesthetic appeal. Examples include:
+            
+                    The Trevi Fountain in Rome, Italy, a renowned Baroque masterpiece.
+                    The Bellagio Fountains in Las Vegas, famous for synchronized water and light displays.
+                    2. Natural Source
+                    In a natural context, a fountain can refer to a spring or a natural outflow of water from the ground. This is where water emerges, often in pristine or fresh conditions, from subterranean reservoirs or aquifers. Natural fountains are celebrated for their purity and are often seen as symbols of life, renewal, and sustenance.
+            
+                    3. Metaphorical Usage
+                    Beyond the physical, the term fountain has rich metaphorical and symbolic meanings. Some examples include:
+            
+                    Fountain of Knowledge: A source of endless wisdom or education.
+                    Fountain of Youth: A mythical spring believed to grant eternal youth and vitality to those who drink its waters or bathe in it. This idea has appeared in various cultural myths, such as those of ancient Greece and the Spanish exploration of Florida led by Ponce de León.
+                </p>
+            </div>
+        </div>
+
+        <script>
+    
+            document.querySelector('.topnav .icon').addEventListener('click', function () {
+                const myLinks = document.getElementById('myLinks');
+                if (myLinks.style.display === 'block') {
+                    myLinks.style.display = 'none';
+                } else {
+                    myLinks.style.display = 'block';
+                }
+            });
+
+    
+            function adjustMenuDisplay() {
+                const myLinks = document.getElementById('myLinks');
+                if (window.innerWidth >= 1024) {
+                    myLinks.style.display = 'flex';
+                } else {
+                    myLinks.style.display = 'none';
+                }
+            }
+
+    
+            window.addEventListener('resize', adjustMenuDisplay);
+
+            adjustMenuDisplay();
+        </script>
+    </body>
+</html>

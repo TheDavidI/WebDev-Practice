@@ -1,0 +1,95 @@
+<html>
+<head>
+    <style>
+        /* Добавете вашия стил тук */
+    </style>
+</head>
+<body>
+    <input type="number" id="x" placeholder="x"><br>
+    <input type="number" id="y" placeholder="y"><br><br>
+
+    <button id="add">+</button>
+    <button id="subtract">-</button>
+    <button id="multiply">*</button>
+    <button id="divide">/</button>
+    <button id="clear">C</button>
+    <button id="one">1</button>
+    <button id="two">2</button>
+    <button id="three">3</button>
+    <button id="four">4</button>
+    <button id="five">5</button>
+    <button id="six">6</button>
+    <button id="seven">7</button>
+    <button id="eight">8</button>
+    <button id="nine">9</button>
+    <button id="zero">0</button>
+
+    <p id="result"></p>
+
+    <script>
+        const xInput = document.getElementById("x");
+        const yInput = document.getElementById("y");
+        const result = document.getElementById("result");
+
+        document.getElementById("add").addEventListener("click", add);
+        document.getElementById("subtract").addEventListener("click", subtract);
+        document.getElementById("multiply").addEventListener("click", multiply);
+        document.getElementById("divide").addEventListener("click", divide);
+        document.getElementById("clear").addEventListener("click", clearFields);
+
+        function getValues() {
+            const x = parseFloat(xInput.value);
+            const y = parseFloat(yInput.value);
+            return { x, y };
+        }
+
+        function add() {
+            const values = getValues();
+            result.innerText = "x = " + values.x + ", y = " + values.y + ", result: " + (values.x + values.y);
+        }
+
+        function subtract() {
+            const values = getValues();
+            result.innerText = "x = " + values.x + ", y = " + values.y + ", result: " + (values.x - values.y);
+        }
+
+        function multiply() {
+            const values = getValues();
+            result.innerText = "x = " + values.x + ", y = " + values.y + ", result: " + (values.x * values.y);
+        }
+
+        function divide() {
+            const values = getValues();
+            if (values.y === 0) {
+                result.innerText = "You can't divide by zero!";
+            } else {
+                result.innerText = "x = " + values.x + ", y = " + values.y + ", result: " + (values.x / values.y);
+            }
+        }
+
+        function clearFields() {
+            xInput.value = "";
+            yInput.value = "";
+            result.innerText = "";
+        }
+
+        function insertNumber(num) {
+            const activeInput = document.activeElement;
+            if (activeInput === xInput || activeInput === yInput) {
+                activeInput.value += num;
+            }
+        }
+
+        document.getElementById("one").addEventListener("click", () => insertNumber(1));
+        document.getElementById("two").addEventListener("click", () => insertNumber(2));
+        document.getElementById("three").addEventListener("click", () => insertNumber(3));
+        document.getElementById("four").addEventListener("click", () => insertNumber(4));
+        document.getElementById("five").addEventListener("click", () => insertNumber(5));
+        document.getElementById("six").addEventListener("click", () => insertNumber(6));
+        document.getElementById("seven").addEventListener("click", () => insertNumber(7));
+        document.getElementById("eight").addEventListener("click", () => insertNumber(8));
+        document.getElementById("nine").addEventListener("click", () => insertNumber(9));
+        document.getElementById("zero").addEventListener("click", () => insertNumber(0));
+    </script>
+</body>
+</html>

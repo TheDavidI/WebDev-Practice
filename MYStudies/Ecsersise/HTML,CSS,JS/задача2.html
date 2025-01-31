@@ -1,0 +1,54 @@
+<html>
+<body>
+    <section class="calculator">
+        <form>
+            <input type="text" class="screen">
+        </form>
+        <div class="button">
+            <button type="button" class="is-umno" data-num="*">*</button>
+            <button type="button" class="is-deli" data-num="/">/</button>
+            <button type="button" class="is-minus" data-num="-">-</button>
+            <button type="button" class="is-plus" data-num="+">+</button>
+            <button type="button" class="is-equal">=</button>
+            <button type="button" class="is-clear">C</button>
+        </div>
+    </section>
+
+    <script>
+        // Дефинираме променливите извън функцията
+        const screen = document.querySelector('.screen');
+        const buttons = document.querySelectorAll('.button button');
+        const clear = document.querySelector('.is-clear');
+        const equal = document.querySelector('.is-equal');
+
+        // Слушател за бутона "="
+        equal.addEventListener('click', function() {
+            if (screen.value === '') {
+                screen.value = "Please enter";
+            } else {
+                try {
+                    let answer = eval(screen.value);
+                    screen.value = answer;
+                } catch (error) {
+                    screen.value = "Error";
+                }
+            }
+        });
+
+        // Слушател за бутона "C"
+        clear.addEventListener('click', function() {
+            screen.value = "";
+        });
+
+        // Слушатели за всички бутони
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                let value = e.target.dataset.num;
+                if (value !== undefined) {
+                    screen.value += value;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

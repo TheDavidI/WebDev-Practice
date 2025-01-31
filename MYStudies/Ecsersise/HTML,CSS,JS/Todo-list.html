@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple Calculator</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #cecece;
+        }
+        
+        .list-item {
+            border: 1px solid;
+            background-color: white;
+            font-size: 24px;
+            padding: 10px 20px;
+            cursor: pointer;
+            
+            
+            /* Important to know */
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .list-item:hover {
+            background: black;
+            color: white;
+        }
+
+
+        .list-item.checked {
+            text-decoration: line-through;
+        }
+
+        .new-task {
+            padding: 10px 15px;
+            width: 100%;
+            margin: 20px;
+            font-size: 18px;
+            border: 1px solid green;
+            outline: none;
+            border-radius: 10px;
+        }
+
+        .btn {
+            padding: 10px 35px;
+            outline: none;
+            border: 2px solid white;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            background-color: black;
+            color: white;
+            transition: all 0.3s linear;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .btn:hover {
+            border-color: green;
+            transform: scale(1.1);
+        }
+
+        .remove-element:hover {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="list" id="tasks_list">
+        <p class="list-item">Task 1 <span class="remove-element">x</span></p>
+        <p class="list-item">Task 2 <span class="remove-element">x</span></p>
+        <p class="list-item">Task 3 <span class="remove-element">x</span></p>
+        <p class="list-item">Task 4 <span class="remove-element">x</span></p>
+        <p class="list-item">Task 5 <span class="remove-element">x</span></p>
+    </div>
+
+    <input type="text" placeholder="New Task title..." id="new_task_field" class="new-task">
+    <button class="btn" id="add_button">Add</button>
+
+
+
+    <script>
+
+        // I need to check task when i click on it and to togle cheched status
+            // i need to get all the elements by there class name and assign them to my constant
+            const myItems = document.querySelectorAll('.list-item');
+
+            // i need to add event listener for click to every element in the list
+             for(let i = 0; i < myItems.length; i++) {
+                myItems[i].addEventListener('click', function(event) {
+                    // toggle check status
+                    event.target.classList.toggle('checked');                    
+                });
+            }
+
+        
+        // I need to have X mark next to every task
+        // -  and when i click it i need to remove the task from the page
+        
+        // when i click the X mark remove the task
+            
+            // get all x marks
+            const removeBtns = document.querySelectorAll('.remove-element');
+
+            // i need to add event listener for click on the mark
+            for(let i = 0; i < removeBtns.length; i++) {
+                removeBtns[i].addEventListener('click', function(event) {
+                    // remove element
+                    event.target.parentElement.remove();
+                });
+            }
+        
+
+        // i need to be able to create new elemnts
+            // i need input where i can write the task -----
+
+            // i need button to add the task when i click it
+
+
+            const butoncho = document.getElementById('add_button');
+            
+            butoncho.addEventListener('click', function() {
+                //  i need to get the input value
+                let newTaskValue = document.getElementById('new_task_field').value;
+
+                // get the list element
+                let listElement = document.getElementById('tasks_list');
+
+
+                // add it to the list
+
+                let newParagraph = document.createElement('p');
+                newParagraph.classList.add('list-item');
+                newParagraph.innerText = newTaskValue;
+
+                let newRemoveMark = document.createElement('span');
+                newRemoveMark.classList.add('remove-element');
+                newRemoveMark.innerText = 'X';
+
+                // add to be able to check the task
+
+                newParagraph.addEventListener('click', function(event) {
+                    event.target.classList.toggle('checked');                    
+                });
+
+                // add to able to to remove the task
+
+                newRemoveMark.addEventListener("click", function(event) {
+                    event.target.parentElement.remove();
+                });
+                
+                newParagraph.appendChild(newRemoveMark);
+                
+                // append to list
+                listElement.appendChild(newParagraph);
+
+                document.getElementById("new_task_field").value = "";
+
+               
+
+            })
+            
+
+    </script>
+</body>
+</html>

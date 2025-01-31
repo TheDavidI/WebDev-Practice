@@ -1,0 +1,53 @@
+<html>
+    <body>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            ul {
+                padding: 0;
+                margin: 0;
+                display: inline-block;
+            }
+            ul li {
+                cursor: pointer;
+                position: relative;
+                padding: 15px 25px;
+                background: darkgray;
+                font-size: 20px;
+                color: #fff;
+                border: 1px solid;
+            }
+
+            ul li:hover {
+                background:aqua;
+            }
+
+            .active {
+                text-decoration: line-through;
+            }
+            
+        </style>
+        
+        <ul>
+            <li class="list-item">Отиди до магазина</li>
+            <li class="list-item">Свали Игра от Steam</li>
+            <li class="list-item">Напраави домашно</li>
+            <li class="list-item">Играй игра </li>
+            <li class="list-item">Лягай да спиш</li>
+        </ul>
+
+        <script>
+            let listItems = document.getElementsByClassName('list-item');
+
+            for (let index = 0; index < listItems.length; index++) {
+                listItems[index].addEventListener('click', (e) => {
+                    e.target.classList.toggle('active');
+                });
+            }
+        </script>
+        
+    </body>
+</html>

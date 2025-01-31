@@ -1,0 +1,58 @@
+<html>
+    <body>
+        <input type="number" id="x" placeholder="x"><br>
+        <input type="number" id="y" placeholder="y"><br><br>
+        <button id="add">+</button>
+        <button id="subtract">-</button>
+        <button id="multiply">*</button>
+        <button id="divide">/</button>
+        <button id="clear">C</button>
+
+        <p id="result"></p>
+
+        <script>
+            const xInput = document.getElementById("x")
+            const yInput = document.getElementById("y")
+            const result = document.getElementById("result")
+
+            document.getElementById("add").addEventListener("click", add);
+            document.getElementById("subtract").addEventListener("click", subtract);
+            document.getElementById("multiply").addEventListener("click", multiply);
+            document.getElementById("divide").addEventListener("click", divide);
+            document.getElementById("clear").addEventListener("click", clearFields);
+
+            function getValues() {
+                let x = parseFloat(xInput.value);
+                let y = parseFloat(yInput.value);
+                return {x , y}; 
+            }
+
+            function add() {
+                let values = getValues();
+                result.innerText = "x = " + values.x + ", y = " + values.y + ", result:" + (values.x + values.y);
+            }
+            function subtract() {
+                let values = getValues();
+                result.innerText = "x = " + values.x + ", y = " + values.y + ", result:" + (values.x - values.y);
+            }
+            function multiply() {
+                let values = getValues();
+                result.innerText = "x = " + values.x + ", y = " + values.y + ", result:" + (values.x * values.y);
+            }
+            function divide() {
+                let values = getValues();
+                if (values.y === 0) {
+                    result.innerText = "x =" + values.x + ", y =" + values.y + ", You Can't";
+                } else {
+                    result.innerText = "x = " + values.x + ", y = " + values.y + ", result:" + (values.x / values.y);
+                }
+            }
+            function clearFields() {
+                xInput.value = "";
+                yInput.value = "";
+                result.innerText = "";
+            }
+            
+        </script>
+    </body>
+</html>

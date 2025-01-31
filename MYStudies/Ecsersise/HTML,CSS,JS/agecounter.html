@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+                margin: 50px;
+            }
+            .results {
+                margin-top: 20px;
+                font-size: 20px;
+                color: red;
+            }
+            input, button {
+                padding: 10px;
+                margin: 10px;
+                font-size: 18px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Age Calculator</h1>
+        <label for="birthdate">Enter your birrt date:</label>
+        <input type="date" id="birthdate">
+        <button id="calculateBtn">Calculate Age</button>
+        <div class="results" id="result"></div>
+
+        <script>
+            function calculateAge(birthDate) {
+                const today = new Date();
+                const birth = new Date(birthDate);
+
+                let years = today.getFullYear() - birth.getFullYear();
+
+                let months = today.getMonth() - birth.getMonth();
+                if (months < 0) {
+                    years--;
+                    months += 12;
+                }
+
+                let days = today.getDate() - birth.getDate();
+                if (days < 0) {
+                    months--;
+                    const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                    days += prevMonth.getDate();
+                }
+                
+                return { years, months, days };
+            }
+
+            document.getElementById("calculateBtn").addEventListener("click", () => {
+                const birthdate = document.getElementById("birthdate").value;
+                const resultDiv = document.getElementById("result");
+                
+                if (!birthdate) {
+                    resultDiv.textContent = "Please enter a valid date!";
+                    return;
+                }
+
+                const { years, months, days } = calculateAge(birthdate);
+
+                resultDiv.textContent = "Your age is: " + years + " years, " + months + " months, " + days + " days.";
+            });
+
+        </script>
+    </body>
+</html>

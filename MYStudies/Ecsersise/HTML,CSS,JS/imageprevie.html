@@ -1,0 +1,88 @@
+
+<html>
+    <head>
+        <title>1 час и 46 минути</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                text-align: center;
+                padding: 20px;
+            }
+
+            input {
+                margin: 20px 0;
+                padding: 10px;
+                font-size: 15px;
+                border: 2px solid #ccc;
+                border-radius: 10px;   
+            }
+
+            .image-preview {
+                margin-top: 20px;
+                max-width: 300px;
+                max-height: 300px;
+                border: 2px solid #ddd;
+                border-radius: 10px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .delete-image {
+                margin-top: 10px;
+                padding: 10px 20px;
+                background-color: #ff4d4d;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.5s;
+            }
+
+            .delete-image:hover {
+                background-color: #e60000;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Upload and Preview Image</h1>
+        <input type="file" id="imageInput">
+
+        <img class="image-preview" style="display: none;" alt="Image Preview">
+
+        <button class="delete-image" style="display: none;">Delete Image</button>
+
+        <script>
+            document.getElementById('imageInput').addEventListener('change', function () {
+                const input = this;
+                const file = input.files[0];
+
+                if (file) {
+                    const fileReader = new FileReader();
+                    fileReader.onload = function (event) {
+                        let imagePReview = document.querySelector('.image-preview');
+                        imagePReview.src = event.target.result;
+                        imagePReview.style.display = 'block';
+                        document.querySelector('.image-preview').style.display = 'block';
+                        document.querySelector('.delete-image').style.display = 'block';
+                    };
+                    fileReader.readAsDataURL(file);
+                }
+            });
+
+            document.querySelector('.delete-image').addEventListener('click', function () {
+                document.getElementById('imageInput').value = '';
+                let imagePReview = document.querySelector('.image-preview');
+                imagePReview.src = '';
+                imagePReview.style.display = 'none';
+                this.style.display = 'none'; 
+            });
+        </script>
+    </body>
+</html>

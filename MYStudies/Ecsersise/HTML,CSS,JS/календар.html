@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> 4 часа и 17 минути</title>
+        <style>
+            .calendar {
+                width: 300px;
+                margin: auto;
+                font-family: Arial, sans-serif;
+                text-align: center;
+            }
+
+            .month {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .weekdays, .days {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 5px;
+            }
+
+            .weekdays span {
+                font-weight: bold;
+            }
+
+            .days span {
+                padding: 5px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+                text-align: center;
+            }
+
+            .days span:hover {
+                background-color: #ddd;
+                cursor: pointer;
+            }
+
+            .days span:nth-child(6),
+            .days span:nth-child(7) {
+                color: rgb(255, 0, 0);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="calendar">
+            <div class="month"></div>
+            <button id="prevMonth" style="font-size: 20px; width: 50px;">&lArr;</button>
+            <button id="nextMonth" style="font-size: 20px; width: 50px;">	&rArr;</button>
+            <div class="weekdays">
+                <span>Нд</span>
+                <span>Пн</span>
+                <span>Вт</span>
+                <span>Ср</span>
+                <span>Чт</span>
+                <span>Пт</span>
+                <span>Сб</span>
+            </div>
+            <div class="days"></div>
+        </div>
+        <script>
+            let date = new Date();
+            let month = date.getMonth();
+            let year = date.getFullYear();
+
+            function generateDays(year, month) {
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const firstDay = new Date(year, month, 1).getDay();
+
+                return {daysInMonth, firstDay};
+            }
+
+            function updateMonthHeader(year, month) {
+                const monthNames = ['Ян', 'Фев', 'Мар', 'Апр', 'Май', 'Юни', 'Юли', 'Авг', 'Сеп', 'Окт', 'Ное', 'Дек'];
+                document.querySelector(".month").textContent = "Месец: " + monthNames[month] + " " + year;
+            }
+
+            function updateCalendar(year, month) {
+                const {daysInMonth, firstDay} = generateDays(year, month);
+                const daysContainer = document.querySelector(".days");
+                daysContainer.innerHTML = "";
+
+                for (let i = 0; i < firstDay; i++) {
+                    const emptySpan = document.createElement("span");
+                    daysContainer.appendChild(emptySpan);
+                }
+                                       
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const daySpan = document.createElement("span");
+                    daySpan.textContent = "[" + day + "]";
+                    daysContainer.appendChild(daySpan);
+
+                    const today = new Date();
+                    if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
+                        daySpan.style.backgroundColor = "lightgreen";
+                    }
+                }
+                updateMonthHeader(year, month);
+            }
+
+            document.getElementById("prevMonth").addEventListener("click", function () {
+                month--;
+                if (month < 0) {
+                    month = 11;
+                    year--;
+                }
+                updateCalendar(year, month);
+            });
+            document.getElementById("nextMonth").addEventListener("click", function () {
+                month++;
+                if (month > 11) {
+                    month = 0;
+                    year++;
+                }
+                updateCalendar(year,month);
+            });
+
+            updateCalendar(year,month);
+        </script>
+    </body>
+</html>

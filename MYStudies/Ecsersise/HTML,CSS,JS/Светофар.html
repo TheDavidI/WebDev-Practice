@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #333;
+            }
+
+            .traffic-light {
+                width: 100px;
+                background: #111;
+                border-radius: 10px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .light {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: #555;
+                transition: background 0.6s;
+            }
+
+            .light.red.active {
+                background: red;
+            }
+
+            .light.yellow.active {
+                background: yellow;
+            }
+
+            .light.green.active {
+                background: green;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="traffic-light">
+            <div class="light red active"></div>
+            <div class="light yellow"></div>
+            <div class="light green"></div>
+        </div>
+        <script>
+            const lights = document.querySelectorAll(".light");
+            let currentIndex = 0;
+
+            function changeLight() {
+                lights.forEach(light => light.classList.remove("active"));
+
+                lights[currentIndex].classList.add("active");
+
+                currentIndex = (currentIndex + 1) % lights.length;
+            }
+
+            setInterval(changeLight, 5000);
+
+        </script>
+    </body>
+</html>

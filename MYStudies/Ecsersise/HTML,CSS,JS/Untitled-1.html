@@ -1,0 +1,50 @@
+<html>
+    <body>
+        <section class="calculator">
+            <form>
+                <input type="text" class="screen">
+            </form>
+            <div class="button">
+                <button type="button" class="is-umno" data-num="*">*</button>
+                <button type="button" class="is-deli" >/</button>
+                <button type="button" class="is-minus" >-</button>
+                <button type="button" class="is-plus" >+</button>
+                <button type="button" class="is-clear">=</button>
+                <button type="button" class="is-equal">C</button>
+            </div>
+        </section>
+        <script>
+            equal.addEventListener('click', function(e) {
+        if (screen.value === '') {
+            screen.value = "Please enter";
+        } else {
+            try {
+                let answer = eval(screen.value);
+                screen.value = answer;
+            } catch (error) {
+                screen.value = "Error";
+            }
+        }
+    });
+    clear.addEventListener('click', function(e) {
+        screen.value = "";
+    });
+
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            let value = e.target.dataset.num;
+            if (value !== undefined) {
+                screen.value += value;
+            }
+        });
+    });
+
+    function() {
+        let screen = document.querySelector('.screen');
+    let buttons = document.querySelectorAll('.is');
+    let clear = document.querySelector('.is-clear');
+    let equal = document.querySelector('.is-equal');
+    }
+        </script>
+    </body>
+</html>

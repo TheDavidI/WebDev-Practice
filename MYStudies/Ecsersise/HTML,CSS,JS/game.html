@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background-color: #f4f4f4;
+    }
+
+    .choices {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .choice {
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .choice:hover {
+      transform: scale(1.1);
+    }
+
+    .results {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .result-image {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
+
+    .result-text {
+      font-size: 22px;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    .winner {
+      color: green;
+    }
+
+    .loser {
+      color: red;
+    }
+
+    .tie {
+      color: orange;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+
+  <div class="choices">
+    <img src="game/TheRock.png" alt="Rock" class="choice" id="rock" width="200" height="200">
+    <img src="game/Paper.png" alt="Paper" class="choice" id="paper" width="200" height="200">
+    <img src="game/scisers.png" alt="Scissors" class="choice" id="scissors" width="200" height="200">
+  </div>
+
+  <div class="results">
+    <div>
+      <h3>Your Choice</h3>
+      <img src="game/you.png" alt="Your Choice" class="result-image" id="player-choice">
+    </div>
+    <div>
+      <h3>Computer's Choice</h3>
+      <img src="game/bot.png" alt="Computer's Choice" class="result-image" id="computer-choice">
+    </div>
+  </div>
+
+  <div class="result-text" id="result"></div>
+
+  <script>
+    // Възможни избори
+    const choices = ["Rock", "Paper", "Scissors"];
+    const choiceImages = {
+      Rock: "game/TheRock.png",
+      Paper: "game/Paper.png",
+      Scissors: "game/scisers.png"
+    };
+
+    // Елементи от DOM
+    const playerChoiceImg = document.getElementById("player-choice");
+    const computerChoiceImg = document.getElementById("computer-choice");
+    const resultText = document.getElementById("result");
+
+    // Функция за случаен избор на компютъра
+    function getComputerChoice() {
+      const randomIndex = Math.floor(Math.random() * 3);
+      return choices[randomIndex];
+    }
+
+    // Функция за определяне на победителя
+    function determineWinner(playerChoice, computerChoice) {
+      if (playerChoice === computerChoice) {
+        return "It's a Tie!";
+      }
+      if (
+        (playerChoice === "Rock" && computerChoice === "Scissors") ||
+        (playerChoice === "Paper" && computerChoice === "Rock") ||
+        (playerChoice === "Scissors" && computerChoice === "Paper")
+      ) {
+        return "You Win!";
+      } else {
+        return "Computer Wins!";
+      }
+    }
+
+    // Функция за играта
+    function playGame(playerChoice) {
+      const computerChoice = getComputerChoice();
+
+      // Актуализиране на изображенията
+      playerChoiceImg.src = choiceImages[playerChoice];
+      computerChoiceImg.src = choiceImages[computerChoice];
+
+      // Определяне на победителя
+      const result = determineWinner(playerChoice, computerChoice);
+
+      // Актуализиране на резултата
+      resultText.textContent = result;
+      resultText.className = "result-text";
+      if (result === "You Win!") {
+        resultText.classList.add("winner");
+      } else if (result === "Computer Wins!") {
+        resultText.classList.add("loser");
+      } else {
+        resultText.classList.add("tie");
+      }
+    }
+
+    // Добавяне на слушатели за изборите
+    document.getElementById("rock").addEventListener("click", () => playGame("Rock"));
+    document.getElementById("paper").addEventListener("click", () => playGame("Paper"));
+    document.getElementById("scissors").addEventListener("click", () => playGame("Scissors"));
+  </script>
+</body>
+</html>

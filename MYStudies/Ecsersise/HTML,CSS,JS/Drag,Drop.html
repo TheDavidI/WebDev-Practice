@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>2 часа и 47 минути</title>
+        <style>
+            * body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .container {
+                width: 100%;
+                min-height: 100vh;
+                background: #0b0423;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #left, #right {
+                width: 300px;
+                min-height: 455px;
+                margin: 25px;
+                border: 2px dashed #fff ;
+                border-radius: 10px;
+            }
+            .list {
+                background: #e91e63;
+                height: 50px;
+                margin: 20px;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                cursor: grab;
+                border-radius: 10px;
+            }
+            .list img{
+                width: 30px;
+                margin-right: 15px;
+                margin-left: 1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="left">
+                <div class="list" draggable="true"><img src="/Предишни задачи/game/drag-vertical-svgrepo-com.png">A</div>
+                <div class="list" draggable="true"><img src="/Предишни задачи/game/drag-vertical-svgrepo-com.png">Е</div>
+                <div class="list" draggable="true"><img src="/Предишни задачи/game/drag-vertical-svgrepo-com.png">Н</div>
+                <div class="list" draggable="true"><img src="/Предишни задачи/game/drag-vertical-svgrepo-com.png">Т</div>
+                <div class="list" draggable="true"><img src="/Предишни задачи/game/drag-vertical-svgrepo-com.png">С</div>
+                <div class="list" draggable="true"><img src="/Предишни задачи/game/drag-vertical-svgrepo-com.png">О</div>
+            </div>
+            <div id="right"></div>
+        </div>
+        <script>
+              let lists = document.getElementsByClassName("list");
+            let rightBox = document.getElementById("right");
+            let leftBox = document.getElementById("left");
+            let selected = null; 
+
+            for (let list of lists) {
+                list.addEventListener("dragstart", function(e) {
+                    selected = e.target; 
+                });
+            }
+
+            rightBox.addEventListener("dragover", function(e) {
+                e.preventDefault();
+            });
+
+            rightBox.addEventListener("drop", function(e) {
+                if (selected) {
+                    rightBox.appendChild(selected);
+                    selected = null; 
+                }
+            });
+
+            leftBox.addEventListener("dragover", function(e) {
+                e.preventDefault();
+            });
+
+            leftBox.addEventListener("drop", function(e) {
+                if (selected) {
+                    leftBox.appendChild(selected);
+                    selected = null;
+                }
+            });
+        </script>
+    </body>
+</html>

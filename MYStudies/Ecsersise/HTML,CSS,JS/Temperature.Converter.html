@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>2 часа и 11 минути</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color: #f4f4f9;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                padding: 20px;
+            }
+
+            .converter {
+                background: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                width: 300px;
+            }
+
+            .converter p {
+                margin-bottom: 15px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+                color: #333;
+            }
+
+            input[type="number"] {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                outline: none;
+                transition: border-color 0.3s ease;
+            }
+
+            input[type="number"]:focus {
+                border-color: #33cc33;
+            }
+
+            .converter h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                font-size: 24px;
+                color: #555;
+            }
+        </style>
+    </head>
+    <body>
+        <p>
+            <label>Fahrenheit</label>
+            <input id="Fahrenheit" type="number" placeholder="Fahrenheit">
+        </p>
+        <p>
+            <label>Celsius</label>
+            <input id="Celsius" type="number" placeholder="Celsius">  
+        </p>
+        <p>
+            <label>Kelvin</label>
+            <input id="Kelvin" type="number" placeholder="Kelvin">
+        </p>
+        <script>
+            let celsius = document.getElementById('Celsius');
+            let fahrenheit = document.getElementById('Fahrenheit');
+            let kelvin = document.getElementById('Kelvin');
+
+            celsius.oninput = function() {
+                let f = (parseFloat((celsius.value)*1.8)+32);
+                fahrenheit.value = parseFloat(f.toFixed(2));
+ 
+                let k = (parseFloat(((celsius.value)-32)/1.8)+273.15);
+                kelvin.value = parseFloat(k.toFixed(2));
+            }
+            fahrenheit.oninput = function() {
+                let c = (parseFloat((fahrenheit.value)-32)/1.8);
+                celsius.value = parseFloat(c.toFixed(2))
+
+                let k = (parseFloat(((fahrenheit.value)-32)/1.8)+273.15);
+                kelvin.value = parseFloat(k.toFixed(2));
+            }
+
+            kelvin.oninput = function() {
+                let f = (parseFloat(((kelvin.value)-273.15)*1.8)+32);
+                fahrenheit.value = parseFloat(f.toFixed(2));
+
+                let c = (parseFloat(kelvin.value)-273.15);
+                celsius.value = parseFloat(c.toFixed(2))
+            }
+        </script>
+    </body>
+</html>

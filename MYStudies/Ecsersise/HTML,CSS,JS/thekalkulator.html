@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        .calculator {
+            width: 200px;
+            margin: auto;
+            text-align: center;
+        }
+        .screen {
+            width: 180px;
+            height: 40px;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: right;
+        }
+        button {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="screen" class="screen" disabled>
+        <br>
+        
+        <button class="num" data-value="7">7</button>
+        <button class="num" data-value="8">8</button>
+        <button class="num" data-value="9">9</button>
+        <button class="num" data-value="4">4</button>
+        <button class="num" data-value="5">5</button>
+        <button class="num" data-value="6">6</button>
+        <button class="num" data-value="1">1</button>
+        <button class="num" data-value="2">2</button>
+        <button class="num" data-value="3">3</button>
+        <button class="num" data-value="0">0</button>
+        <button class="op" data-value="+">+</button>
+        <button class="op" data-value="-">-</button>
+        <button class="op" data-value="*">*</button>
+        <button class="op" data-value="/">/</button>
+        <button id="equals">=</button>
+        <button id="clear">C</button>
+        
+        
+    </div>
+
+    <script>
+        
+        const screen = document.getElementById("screen");
+        const numButtons = document.querySelectorAll(".num");
+        const opButtons = document.querySelectorAll(".op");
+        const clearButton = document.getElementById("clear");
+        const equalsButton = document.getElementById("equals");
+
+        
+        let currentInput = ""; 
+        let previousValue = ""; 
+        let operator = null; 
+
+        
+        numButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                currentInput += button.dataset.value;
+                screen.value = currentInput;
+            });
+        });
+
+        
+        opButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                if (currentInput !== "") {
+                    previousValue = currentInput;
+                    currentInput = "";
+                    operator = button.dataset.value;
+                }
+            });
+        });
+
+        
+        equalsButton.addEventListener("click", () => {
+            if (previousValue !== "" && currentInput !== "" && operator !== null) {
+                const num1 = parseFloat(previousValue);
+                const num2 = parseFloat(currentInput);
+                let result;
+
+                
+                switch (operator) {
+                    case "+":
+                        result = num1 + num2;
+                        break;
+                    case "-":
+                        result = num1 - num2;
+                        break;
+                    case "*":
+                        result = num1 * num2;
+                        break;
+                    case "/":
+                        result = num2 !== 0 ? num1 / num2 : "Error";
+                        break;
+                }
+
+                screen.value = result;
+                currentInput = result.toString();
+                previousValue = "";
+                operator = null;
+            }
+        });
+
+        
+        clearButton.addEventListener("click", () => {
+            currentInput = "";
+            previousValue = "";
+            operator = null;
+            screen.value = "";
+        });
+    </script>
+</body>
+</html>
