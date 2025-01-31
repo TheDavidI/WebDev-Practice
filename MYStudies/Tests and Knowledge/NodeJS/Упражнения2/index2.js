@@ -1,0 +1,2 @@
+require("./Chief");
+require("./Thor");
